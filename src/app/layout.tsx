@@ -27,14 +27,14 @@ export default async function RootLayout({
   if (user) {
     const { data } = await supabase
       .from('profiles')
-      .select('full_name')
+      .select('full_name, is_admin')
       .eq('id', user.id)
       .single()
     profile = data
   }
 
   const navUser = user
-    ? { email: user.email, full_name: profile?.full_name ?? undefined }
+    ? { email: user.email, full_name: profile?.full_name ?? undefined, is_admin: profile?.is_admin ?? false }
     : null
 
   return (

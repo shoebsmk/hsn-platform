@@ -6,12 +6,13 @@ import { logout } from '@/app/auth/actions'
 
 const navLinks = [
   { label: 'Opportunities', href: '/opportunities' },
+  { label: 'Guidance', href: '/guidance' },
   { label: 'Mentorship', href: '/mentorship' },
   { label: 'About', href: '/about' },
 ]
 
 interface NavbarProps {
-  user?: { email?: string; full_name?: string } | null
+  user?: { email?: string; full_name?: string; is_admin?: boolean } | null
 }
 
 export default function Navbar({ user }: NavbarProps) {
@@ -54,6 +55,11 @@ export default function Navbar({ user }: NavbarProps) {
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
             {user ? (
               <>
+                {user.is_admin && (
+                  <Link href="/admin" style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--hsn-green)', textDecoration: 'none', border: '1px solid var(--hsn-green)', borderRadius: '0.375rem', padding: '0.25rem 0.6rem' }}>
+                    Admin
+                  </Link>
+                )}
                 <Link
                   href="/dashboard"
                   style={{
@@ -66,7 +72,7 @@ export default function Navbar({ user }: NavbarProps) {
                     gap: '0.4rem',
                   }}
                 >
-                  <span style={{
+              <span style={{
                     width: '30px',
                     height: '30px',
                     borderRadius: '50%',

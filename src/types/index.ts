@@ -9,9 +9,11 @@ export type OpportunityCategory =
   | 'career_guidance'
   | 'mentorship'
 
-export type OpportunityStatus = 'pending' | 'verified' | 'rejected'
+export type OpportunityStatus = 'pending' | 'active' | 'verified' | 'rejected' | 'closed' | 'flagged' | 'expired'
 
 export type Location = 'hyderabad' | 'chicago' | 'remote'
+
+export type GuidanceCategory = 'islamic_finance' | 'career' | 'business' | 'community' | 'general'
 
 export interface Profile {
   id: string
@@ -21,6 +23,7 @@ export interface Profile {
   location: Location
   bio?: string
   avatar_url?: string
+  is_admin?: boolean
   created_at: string
 }
 
@@ -38,6 +41,26 @@ export interface Opportunity {
   is_remote: boolean
   created_at: string
   updated_at: string
+}
+
+export interface GuidanceArticle {
+  id: string
+  title: string
+  content: string
+  category: GuidanceCategory
+  published: boolean
+  author_id?: string
+  author?: Profile
+  created_at: string
+  updated_at: string
+}
+
+export interface Announcement {
+  id: string
+  message: string
+  active: boolean
+  location_target: 'all' | 'hyderabad' | 'chicago'
+  created_at: string
 }
 
 export interface MentorProfile {
