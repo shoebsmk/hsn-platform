@@ -18,8 +18,8 @@ import {
 } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Opportunities', href: '/opportunities', icon: Briefcase },
-  { label: 'Directory',     href: '/directory',     icon: Store },
+  { label: 'Jobs',     href: '/jobs',     icon: Briefcase },
+  { label: 'Business', href: '/business', icon: Store },
   { label: 'Halal Check',   href: '/halal-check',   icon: ShieldCheck },
   { label: 'Guidance',      href: '/guidance',       icon: BookOpen },
   { label: 'Mentorship',    href: '/mentorship',     icon: Users },

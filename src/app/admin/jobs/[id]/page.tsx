@@ -32,8 +32,8 @@ export default async function AdminOpportunityDetailPage({ params }: { params: P
   return (
     <div style={{ maxWidth: '800px' }}>
       {/* Back */}
-      <a href="/admin/opportunities" style={{ color: 'var(--hsn-green)', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none' }}>
-        ← Back to Opportunities
+      <a href="/admin/jobs" style={{ color: 'var(--hsn-green)', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none' }}>
+        ← Back to Jobs
       </a>
 
       <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -104,7 +104,7 @@ export default async function AdminOpportunityDetailPage({ params }: { params: P
         {/* Moderation actions */}
         <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.5rem', border: '1px solid var(--hsn-border)' }}>
           <h2 style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--hsn-dark)', marginBottom: '1rem' }}>Moderation</h2>
-          <OppActions id={opp.id} status={opp.status} redirectTo={`/admin/opportunities/${opp.id}`} />
+          <OppActions id={opp.id} status={opp.status} redirectTo={`/admin/jobs/${opp.id}`} />
         </div>
 
         {/* Admin notes */}

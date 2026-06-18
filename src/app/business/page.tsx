@@ -62,10 +62,10 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
         marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem',
       }}>
         <div>
-          <h1 className="section-title">Halal Business Directory</h1>
+          <h1 className="section-title">Halal Business</h1>
           <p className="section-subtitle">Verified halal businesses in your community</p>
         </div>
-        <Link href="/directory/new" className="btn-primary">
+        <Link href="/business/new" className="btn-primary">
           <Plus size={16} />
           Submit Business
         </Link>
@@ -104,13 +104,13 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
               Category
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '1.5rem' }}>
-              <FilterLink href="/directory" label="All Categories" active={!activeCategory} />
+              <FilterLink href="/business" label="All Categories" active={!activeCategory} />
               {BUSINESS_CATEGORIES.map(cat => {
                 const Icon = categoryIcons[cat.value] ?? Package
                 return (
                   <FilterLink
                     key={cat.value}
-                    href={`/directory?category=${cat.value}${activeLocation ? `&location=${activeLocation}` : ''}`}
+                    href={`/business?category=${cat.value}${activeLocation ? `&location=${activeLocation}` : ''}`}
                     label={cat.label}
                     active={activeCategory === cat.value}
                     icon={Icon}
@@ -123,11 +123,11 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
               Location
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <FilterLink href={`/directory${activeCategory ? `?category=${activeCategory}` : ''}`} label="All Locations" active={!activeLocation} icon={MapPin} />
+              <FilterLink href={`/business${activeCategory ? `?category=${activeCategory}` : ''}`} label="All Locations" active={!activeLocation} icon={MapPin} />
               {LOCATIONS.map(loc => (
                 <FilterLink
                   key={loc.value}
-                  href={`/directory?location=${loc.value}${activeCategory ? `&category=${activeCategory}` : ''}`}
+                  href={`/business?location=${loc.value}${activeCategory ? `&category=${activeCategory}` : ''}`}
                   label={loc.label}
                   active={activeLocation === loc.value}
                   icon={MapPin}
@@ -155,7 +155,7 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
               <p style={{ fontSize: '0.875rem', color: 'var(--hsn-gray)', marginBottom: '1.5rem' }}>
                 Be the first to submit one!
               </p>
-              <Link href="/directory/new" className="btn-primary">
+              <Link href="/business/new" className="btn-primary">
                 <Plus size={15} />
                 Submit Business
               </Link>
@@ -202,7 +202,7 @@ function BusinessCard({ biz }: { biz: Business }) {
   const colors = categoryColors[biz.category] ?? { color: '#64748B', bg: '#F1F5F9' }
 
   return (
-    <Link href={`/directory/${biz.id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/business/${biz.id}`} style={{ textDecoration: 'none' }}>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         {/* Top row */}
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem' }}>

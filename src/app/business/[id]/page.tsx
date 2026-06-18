@@ -46,13 +46,13 @@ export default async function BusinessDetailPage({ params }: { params: Promise<{
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-      <Link href="/directory" style={{
+      <Link href="/business" style={{
         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
         color: 'var(--hsn-gray)', fontSize: '0.875rem', textDecoration: 'none',
         marginBottom: '1.75rem',
       }}>
         <ArrowLeft size={15} />
-        Back to Directory
+        Back to Business
       </Link>
 
       <div className="card" style={{ padding: '2rem' }}>

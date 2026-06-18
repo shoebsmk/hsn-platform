@@ -71,12 +71,12 @@ export default async function OpportunitiesPage({ searchParams }: PageProps) {
         gap: '1rem',
       }}>
         <div>
-          <h1 className="section-title">Opportunities</h1>
-          <p className="section-subtitle">Verified halal opportunities from the community</p>
+          <h1 className="section-title">Jobs</h1>
+          <p className="section-subtitle">Verified halal jobs from the community</p>
         </div>
-        <Link href="/opportunities/new" className="btn-primary">
+        <Link href="/jobs/new" className="btn-primary">
           <Plus size={16} />
-          Post Opportunity
+          Post Job
         </Link>
       </div>
 
@@ -113,13 +113,13 @@ export default async function OpportunitiesPage({ searchParams }: PageProps) {
               Category
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '1.5rem' }}>
-              <FilterLink href="/opportunities" label="All Categories" active={!activeCategory} />
+              <FilterLink href="/jobs" label="All Categories" active={!activeCategory} />
               {CATEGORIES.map(cat => {
                 const Icon = categoryIcons[cat.value] ?? Briefcase
                 return (
                   <FilterLink
                     key={cat.value}
-                    href={`/opportunities?category=${cat.value}${activeLocation ? `&location=${activeLocation}` : ''}`}
+                    href={`/jobs?category=${cat.value}${activeLocation ? `&location=${activeLocation}` : ''}`}
                     label={cat.label}
                     active={activeCategory === cat.value}
                     icon={Icon}
@@ -132,11 +132,11 @@ export default async function OpportunitiesPage({ searchParams }: PageProps) {
               Location
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <FilterLink href={`/opportunities${activeCategory ? `?category=${activeCategory}` : ''}`} label="All Locations" active={!activeLocation} icon={MapPin} />
+              <FilterLink href={`/jobs${activeCategory ? `?category=${activeCategory}` : ''}`} label="All Locations" active={!activeLocation} icon={MapPin} />
               {LOCATIONS.map(loc => (
                 <FilterLink
                   key={loc.value}
-                  href={`/opportunities?location=${loc.value}${activeCategory ? `&category=${activeCategory}` : ''}`}
+                  href={`/jobs?location=${loc.value}${activeCategory ? `&category=${activeCategory}` : ''}`}
                   label={loc.label}
                   active={activeLocation === loc.value}
                   icon={MapPin}
@@ -164,9 +164,9 @@ export default async function OpportunitiesPage({ searchParams }: PageProps) {
               <p style={{ fontSize: '0.875rem', color: 'var(--hsn-gray)', marginBottom: '1.5rem' }}>
                 Be the first to post one!
               </p>
-              <Link href="/opportunities/new" className="btn-primary">
+              <Link href="/jobs/new" className="btn-primary">
                 <Plus size={15} />
-                Post Opportunity
+                Post Job
               </Link>
             </div>
           ) : (
@@ -218,7 +218,7 @@ function OpportunityCard({ opp }: { opp: any }) {
   const dateStr = new Date(opp.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
   return (
-    <Link href={`/opportunities/${opp.id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/jobs/${opp.id}`} style={{ textDecoration: 'none' }}>
       <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
         {/* Icon */}
         <div style={{

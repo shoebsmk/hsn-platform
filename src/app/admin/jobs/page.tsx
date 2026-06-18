@@ -81,7 +81,7 @@ export default async function AdminOpportunitiesPage() {
               const colors = categoryColors[opp.category] ?? { color: '#1B6B3A', bg: '#E8F5EE' }
 
               return (
-                <ClickableRow key={opp.id} href={`/admin/opportunities/${opp.id}`}>
+                <ClickableRow key={opp.id} href={`/admin/jobs/${opp.id}`}>
                   <td style={{ padding: '0.875rem 1rem', maxWidth: '200px' }}>
                     <span style={{
                       fontWeight: 600, color: 'var(--hsn-dark)',

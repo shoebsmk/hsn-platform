@@ -50,9 +50,9 @@ export default async function DashboardPage() {
   const quickActions = [
     {
       icon: Search,
-      title: 'Browse Opportunities',
+      title: 'Browse Jobs',
       desc: 'Find verified halal opportunities',
-      href: '/opportunities',
+      href: '/jobs',
       color: '#1B6B3A',
       bg: '#E8F5EE',
     },
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
       icon: Plus,
       title: 'Post an Opportunity',
       desc: 'Share a job or business opportunity',
-      href: '/opportunities/new',
+      href: '/jobs/new',
       color: '#1D4ED8',
       bg: '#EFF6FF',
     },

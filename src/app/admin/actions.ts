@@ -16,32 +16,32 @@ async function requireAdmin() {
 export async function updateOpportunityStatus(id: string, status: string) {
   const supabase = await requireAdmin()
   await supabase.from('opportunities').update({ status }).eq('id', id)
-  revalidatePath('/admin/opportunities')
-  revalidatePath('/opportunities')
+  revalidatePath('/admin/jobs')
+  revalidatePath('/jobs')
 }
 
 export async function approveOpportunity(formData: FormData) {
   const supabase = await requireAdmin()
   const id = formData.get('id') as string
   await supabase.from('opportunities').update({ status: 'active' }).eq('id', id)
-  revalidatePath('/admin/opportunities')
-  revalidatePath('/opportunities')
+  revalidatePath('/admin/jobs')
+  revalidatePath('/jobs')
 }
 
 export async function rejectOpportunity(formData: FormData) {
   const supabase = await requireAdmin()
   const id = formData.get('id') as string
   await supabase.from('opportunities').update({ status: 'rejected' }).eq('id', id)
-  revalidatePath('/admin/opportunities')
-  revalidatePath('/opportunities')
+  revalidatePath('/admin/jobs')
+  revalidatePath('/jobs')
 }
 
 export async function flagOpportunity(formData: FormData) {
   const supabase = await requireAdmin()
   const id = formData.get('id') as string
   await supabase.from('opportunities').update({ status: 'flagged' }).eq('id', id)
-  revalidatePath('/admin/opportunities')
-  revalidatePath('/opportunities')
+  revalidatePath('/admin/jobs')
+  revalidatePath('/jobs')
 }
 
 export async function saveAdminNotes(formData: FormData) {
@@ -49,7 +49,7 @@ export async function saveAdminNotes(formData: FormData) {
   const id = formData.get('id') as string
   const notes = formData.get('notes') as string
   await supabase.from('opportunities').update({ admin_notes: notes }).eq('id', id)
-  revalidatePath(`/admin/opportunities/${id}`)
+  revalidatePath(`/admin/jobs/${id}`)
 }
 
 export async function saveArticle(formData: FormData) {

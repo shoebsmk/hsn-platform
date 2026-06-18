@@ -20,7 +20,7 @@ const categories = [
     icon: Briefcase,
     label: 'Hidden Jobs',
     desc: 'Opportunities shared through community, mosques & referrals',
-    href: '/opportunities?category=hidden_jobs',
+    href: '/jobs?category=hidden_jobs',
     color: '#1B6B3A',
     bg: '#E8F5EE',
   },
@@ -28,7 +28,7 @@ const categories = [
     icon: Users,
     label: 'Community',
     desc: 'Local needs — tutors, caregivers, event support',
-    href: '/opportunities?category=community',
+    href: '/jobs?category=community',
     color: '#1D4ED8',
     bg: '#EFF6FF',
   },
@@ -36,7 +36,7 @@ const categories = [
     icon: Zap,
     label: 'Gig & Services',
     desc: 'Freelance, design, dev, translation & more',
-    href: '/opportunities?category=gig_services',
+    href: '/jobs?category=gig_services',
     color: '#7C3AED',
     bg: '#F5F3FF',
   },
@@ -44,7 +44,7 @@ const categories = [
     icon: TrendingUp,
     label: 'Business',
     desc: 'Partnerships, franchises & investment networking',
-    href: '/opportunities?category=business',
+    href: '/jobs?category=business',
     color: '#B45309',
     bg: '#FEF9E7',
   },
@@ -52,7 +52,7 @@ const categories = [
     icon: DollarSign,
     label: 'Income Generation',
     desc: 'E-commerce, consulting, digital products',
-    href: '/opportunities?category=income',
+    href: '/jobs?category=income',
     color: '#0D9488',
     bg: '#F0FDFA',
   },
@@ -60,7 +60,7 @@ const categories = [
     icon: GraduationCap,
     label: 'Career Guidance',
     desc: 'Certifications, resume help & roadmaps',
-    href: '/opportunities?category=career_guidance',
+    href: '/jobs?category=career_guidance',
     color: '#DC2626',
     bg: '#FEF2F2',
   },
@@ -173,18 +173,18 @@ export default async function HomePage() {
           </p>
 
           <div style={{ display: 'flex', gap: '0.875rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/opportunities" className="btn-primary" style={{
+            <Link href="/jobs" className="btn-primary" style={{
               background: 'white',
               color: 'var(--hsn-green)',
               fontSize: '0.95rem',
               padding: '0.8rem 1.75rem',
               boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
             }}>
-              Browse Opportunities
+              Browse Jobs
               <ArrowRight size={16} />
             </Link>
             {user ? (
-              <Link href="/opportunities/new" className="btn-outline-white" style={{ fontSize: '0.95rem', padding: '0.8rem 1.75rem' }}>
+              <Link href="/jobs/new" className="btn-outline-white" style={{ fontSize: '0.95rem', padding: '0.8rem 1.75rem' }}>
                 <Plus size={16} />
                 Post an Opportunity
               </Link>
@@ -313,7 +313,7 @@ export default async function HomePage() {
         <p style={{ color: '#94A3B8', marginBottom: '2rem', fontSize: '1.05rem', maxWidth: '480px', margin: '0 auto 2rem', lineHeight: 1.7 }}>
           Post a job, business opportunity, or community need — help a fellow Muslim thrive.
         </p>
-        <Link href="/opportunities/new" className="btn-primary" style={{ fontSize: '0.975rem', padding: '0.8rem 2rem' }}>
+        <Link href="/jobs/new" className="btn-primary" style={{ fontSize: '0.975rem', padding: '0.8rem 2rem' }}>
           Post an Opportunity
           <ArrowRight size={16} />
         </Link>

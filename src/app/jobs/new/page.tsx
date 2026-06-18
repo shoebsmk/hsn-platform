@@ -35,8 +35,8 @@ function NewOpportunityForm() {
           JazakAllahu Khayran for contributing!
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-          <Link href="/opportunities" className="btn-primary">Browse Opportunities</Link>
-          <Link href="/opportunities/new" className="btn-secondary">Post Another</Link>
+          <Link href="/jobs" className="btn-primary">Browse Jobs</Link>
+          <Link href="/jobs/new" className="btn-secondary">Post Another</Link>
         </div>
       </div>
     )
@@ -44,7 +44,7 @@ function NewOpportunityForm() {
 
   return (
     <div style={{ maxWidth: '640px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-      <Link href="/opportunities" style={{ color: 'var(--hsn-green)', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginBottom: '1.5rem' }}>
+      <Link href="/jobs" style={{ color: 'var(--hsn-green)', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginBottom: '1.5rem' }}>
         ← Back
       </Link>
 

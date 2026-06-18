@@ -26,7 +26,7 @@ export default async function AdminDirectoryPage() {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A', marginBottom: '0.25rem' }}>Business Directory</h1>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A', marginBottom: '0.25rem' }}>Business</h1>
         <p style={{ color: '#64748B', fontSize: '0.9rem' }}>Manage halal business listings</p>
       </div>
 

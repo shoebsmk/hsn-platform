@@ -12,13 +12,13 @@ export default async function NewBusinessPage() {
 
   return (
     <div style={{ maxWidth: '640px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-      <Link href="/directory" style={{
+      <Link href="/business" style={{
         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
         color: 'var(--hsn-gray)', fontSize: '0.875rem', textDecoration: 'none',
         marginBottom: '1.75rem',
       }}>
         <ArrowLeft size={15} />
-        Back to Directory
+        Back to Business
       </Link>
 
       <div style={{ marginBottom: '2rem' }}>
@@ -87,7 +87,7 @@ export default async function NewBusinessPage() {
             <button type="submit" className="btn-primary" style={{ flex: 1 }}>
               Submit Business
             </button>
-            <Link href="/directory" className="btn-secondary">
+            <Link href="/business" className="btn-secondary">
               Cancel
             </Link>
           </div>

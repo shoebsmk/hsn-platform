@@ -29,8 +29,8 @@ export default async function AdminDashboard() {
 
   const stats = [
     { label: 'Total Members',        value: totalUsers ?? 0,           icon: Users,      color: '#1D4ED8', bg: '#EFF6FF', href: '/admin/users' },
-    { label: 'Total Opportunities',  value: totalOpportunities ?? 0,   icon: Briefcase,  color: '#1B6B3A', bg: '#E8F5EE', href: '/admin/opportunities' },
-    { label: 'Pending Review',       value: pendingOpportunities ?? 0, icon: Clock,      color: '#B45309', bg: '#FEF9E7', href: '/admin/opportunities', alert: (pendingOpportunities ?? 0) > 0 },
+    { label: 'Total Opportunities',  value: totalOpportunities ?? 0,   icon: Briefcase,  color: '#1B6B3A', bg: '#E8F5EE', href: '/admin/jobs' },
+    { label: 'Pending Review',       value: pendingOpportunities ?? 0, icon: Clock,      color: '#B45309', bg: '#FEF9E7', href: '/admin/jobs', alert: (pendingOpportunities ?? 0) > 0 },
     { label: 'Guidance Articles',    value: totalArticles ?? 0,        icon: BookOpen,   color: '#7C3AED', bg: '#F5F3FF', href: '/admin/guidance' },
     { label: 'Active Announcements', value: activeAnnouncements ?? 0,  icon: Megaphone,  color: '#DC2626', bg: '#FEF2F2', href: '/admin/announcements' },
   ]
@@ -149,7 +149,7 @@ export default async function AdminDashboard() {
         <div style={{ background: 'white', borderRadius: '0.875rem', padding: '1.5rem', border: '1px solid var(--hsn-border)', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
             <h2 style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--hsn-dark)' }}>Recent Opportunities</h2>
-            <Link href="/admin/opportunities" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', color: 'var(--hsn-green)', fontWeight: 600, textDecoration: 'none' }}>
+            <Link href="/admin/jobs" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', color: 'var(--hsn-green)', fontWeight: 600, textDecoration: 'none' }}>
               View all <ArrowRight size={12} />
             </Link>
           </div>
@@ -158,7 +158,7 @@ export default async function AdminDashboard() {
               const sc = statusColors[opp.status] ?? { bg: '#F1F5F9', color: '#64748B' }
               return (
                 <div key={opp.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
-                  <Link href={`/admin/opportunities/${opp.id}`} style={{
+                  <Link href={`/admin/jobs/${opp.id}`} style={{
                     fontWeight: 600, color: 'var(--hsn-dark)', fontSize: '0.875rem',
                     flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                     textDecoration: 'none',

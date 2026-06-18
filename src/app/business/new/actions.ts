@@ -25,5 +25,5 @@ export async function submitBusiness(formData: FormData): Promise<void> {
   const { error } = await supabase.from('businesses').insert(payload)
   if (error) throw new Error(error.message)
 
-  redirect('/directory')
+  redirect('/business')
 }

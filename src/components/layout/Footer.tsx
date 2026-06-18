@@ -49,11 +49,11 @@ export default function Footer() {
               Opportunities
             </h4>
             {[
-              ['Hidden Jobs', '/opportunities?category=hidden_jobs'],
-              ['Business', '/opportunities?category=business'],
-              ['Gig & Services', '/opportunities?category=gig_services'],
-              ['Income Generation', '/opportunities?category=income'],
-              ['Community', '/opportunities?category=community'],
+              ['Hidden Jobs', '/jobs?category=hidden_jobs'],
+              ['Business', '/jobs?category=business'],
+              ['Gig & Services', '/jobs?category=gig_services'],
+              ['Income Generation', '/jobs?category=income'],
+              ['Community', '/jobs?category=community'],
             ].map(([label, href]) => (
               <Link key={href} href={href} className="footer-link">{label}</Link>
             ))}
@@ -70,7 +70,7 @@ export default function Footer() {
             {[
               ['Mentorship', '/mentorship'],
               ['Career Guidance', '/guidance'],
-              ['Post an Opportunity', '/opportunities/new'],
+              ['Post an Opportunity', '/jobs/new'],
               ['About HSN', '/about'],
               ['Join the Network', '/auth/signup'],
             ].map(([label, href]) => (

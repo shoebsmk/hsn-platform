@@ -20,8 +20,8 @@ export default async function OpportunityPage({ params }: { params: Promise<{ id
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-      <Link href="/opportunities" style={{ color: 'var(--hsn-green)', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginBottom: '1.5rem' }}>
-        ← Back to Opportunities
+      <Link href="/jobs" style={{ color: 'var(--hsn-green)', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', marginBottom: '1.5rem' }}>
+        ← Back to Jobs
       </Link>
 
       <div className="card">

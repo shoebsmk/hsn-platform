@@ -23,5 +23,5 @@ export async function submitOpportunity(formData: FormData) {
 
   if (error) return { error: error.message }
 
-  redirect('/opportunities/new?submitted=true')
+  redirect('/jobs/new?submitted=true')
 }
