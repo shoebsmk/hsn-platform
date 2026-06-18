@@ -4,80 +4,63 @@ import AnnouncementBanner from '@/components/AnnouncementBanner'
 import {
   Briefcase,
   Users,
-  Zap,
-  TrendingUp,
-  DollarSign,
-  GraduationCap,
   Star,
   CheckCircle,
   ArrowRight,
-  MapPin,
   Plus,
+  BookOpen,
+  Store,
 } from 'lucide-react'
 
-const categories = [
+const features = [
   {
     icon: Briefcase,
-    label: 'Hidden Jobs',
-    desc: 'Opportunities shared through community, mosques & referrals',
-    href: '/jobs?category=hidden_jobs',
-    color: '#1B6B3A',
-    bg: '#E8F5EE',
+    title: 'Jobs',
+    desc: 'Halal job opportunities from community members and verified employers.',
+    href: '/jobs',
+  },
+  {
+    icon: Store,
+    title: 'Business Directory',
+    desc: 'Discover and list halal-certified businesses in your city.',
+    href: '/business',
+  },
+  {
+    icon: BookOpen,
+    title: 'Guidance',
+    desc: 'Islamic finance, career advice, and community wisdom from trusted voices.',
+    href: '/guidance',
   },
   {
     icon: Users,
-    label: 'Community',
-    desc: 'Local needs — tutors, caregivers, event support',
-    href: '/jobs?category=community',
-    color: '#1D4ED8',
-    bg: '#EFF6FF',
-  },
-  {
-    icon: Zap,
-    label: 'Gig & Services',
-    desc: 'Freelance, design, dev, translation & more',
-    href: '/jobs?category=gig_services',
-    color: '#7C3AED',
-    bg: '#F5F3FF',
-  },
-  {
-    icon: TrendingUp,
-    label: 'Business',
-    desc: 'Partnerships, franchises & investment networking',
-    href: '/jobs?category=business',
-    color: '#B45309',
-    bg: '#FEF9E7',
-  },
-  {
-    icon: DollarSign,
-    label: 'Income Generation',
-    desc: 'E-commerce, consulting, digital products',
-    href: '/jobs?category=income',
-    color: '#0D9488',
-    bg: '#F0FDFA',
-  },
-  {
-    icon: GraduationCap,
-    label: 'Career Guidance',
-    desc: 'Certifications, resume help & roadmaps',
-    href: '/jobs?category=career_guidance',
-    color: '#DC2626',
-    bg: '#FEF2F2',
-  },
-  {
-    icon: Star,
-    label: 'Mentorship',
-    desc: 'Connect with experienced professionals',
+    title: 'Mentorship',
+    desc: 'Connect with experienced Muslim professionals who share your values.',
     href: '/mentorship',
-    color: '#C9A84C',
-    bg: '#FEFCE8',
   },
 ]
 
-const trustItems = [
-  { icon: CheckCircle, label: 'All opportunities verified' },
-  { icon: Users, label: 'Community-powered network' },
-  { icon: Star, label: 'Rooted in Islamic values' },
+const pillars = [
+  {
+    icon: CheckCircle,
+    title: 'Halal-Verified',
+    desc: 'Every opportunity reviewed by our community team.',
+  },
+  {
+    icon: Users,
+    title: 'Community-Powered',
+    desc: 'Built by and for the Muslim community.',
+  },
+  {
+    icon: Star,
+    title: 'Islamic Values',
+    desc: 'Rooted in the principles of our deen.',
+  },
+]
+
+const steps = [
+  { n: '1', title: 'Create your free account', desc: 'Join the Ummah\'s trusted network in minutes — no fees, no barriers.' },
+  { n: '2', title: 'Explore opportunities',    desc: 'Browse halal jobs, businesses, guidance, and mentors in one place.' },
+  { n: '3', title: 'Connect & grow',           desc: 'Build your career and community with people who share your values.' },
 ]
 
 export default async function HomePage() {
@@ -112,211 +95,225 @@ export default async function HomePage() {
     <>
       <AnnouncementBanner announcements={announcements ?? []} />
 
-      {/* Hero */}
+      {/* ── Hero ──────────────────────────────────────────────────── */}
       <section style={{
-        background: 'linear-gradient(135deg, #0D3D22 0%, var(--hsn-green) 50%, #2E8B57 100%)',
+        background: 'linear-gradient(135deg, #0D3D22 0%, var(--hsn-green) 55%, #2E8B57 100%)',
         color: 'white',
-        padding: '5.5rem 1.5rem 5rem',
+        minHeight: '85vh',
+        display: 'flex',
+        alignItems: 'center',
+        padding: 'clamp(4rem, 8vh, 6rem) 1.5rem',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Decorative circles */}
-        <div style={{
-          position: 'absolute', top: '-80px', right: '-80px',
-          width: '400px', height: '400px', borderRadius: '50%',
-          background: 'rgba(255,255,255,0.04)', pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-120px', left: '-60px',
-          width: '350px', height: '350px', borderRadius: '50%',
-          background: 'rgba(255,255,255,0.03)', pointerEvents: 'none',
-        }} />
+        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '500px', height: '500px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-140px', left: '-80px',  width: '420px', height: '420px', borderRadius: '50%', background: 'rgba(255,255,255,0.03)', pointerEvents: 'none' }} />
 
-        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', position: 'relative' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+
+          {/* Badge */}
           <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            background: 'rgba(255,255,255,0.12)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '9999px',
-            padding: '0.4rem 1.1rem',
-            fontSize: '0.82rem',
-            fontWeight: 600,
-            marginBottom: '1.75rem',
-            color: 'var(--hsn-gold-light)',
+            display: 'inline-flex', alignItems: 'center', gap: '0.45rem',
+            background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.18)', borderRadius: '9999px',
+            padding: '0.4rem 1.1rem', fontSize: '0.78rem', fontWeight: 600,
+            marginBottom: '2rem', color: 'var(--hsn-gold-light)', letterSpacing: '0.04em',
           }}>
-            <MapPin size={13} />
-            Serving Hyderabad &amp; Greater Chicago
+            ✦&nbsp; Hyderabad &amp; Greater Chicago
           </div>
 
           <h1 style={{
-            fontSize: 'clamp(2.25rem, 5.5vw, 3.5rem)',
-            fontWeight: 900,
-            lineHeight: 1.1,
-            marginBottom: '1.25rem',
-            letterSpacing: '-0.03em',
+            fontSize: 'clamp(2.75rem, 6.5vw, 4.25rem)',
+            fontWeight: 900, lineHeight: 1.05,
+            marginBottom: '1.5rem', letterSpacing: '-0.035em',
           }}>
             Halal Opportunities for<br />
             <span style={{ color: 'var(--hsn-gold-light)' }}>the Muslim Community</span>
           </h1>
 
           <p style={{
-            fontSize: '1.1rem',
-            opacity: 0.85,
-            maxWidth: '520px',
-            margin: '0 auto 2.25rem',
-            lineHeight: 1.75,
+            fontSize: '1.15rem', opacity: 0.8,
+            maxWidth: '500px', margin: '0 auto 2.5rem',
+            lineHeight: 1.8, fontWeight: 400,
           }}>
-            Discover jobs, business opportunities, mentorship, and community connections — all verified and rooted in Islamic values.
+            Connecting the Ummah with trusted halal jobs, businesses, guidance, and community.
           </p>
 
           <div style={{ display: 'flex', gap: '0.875rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/jobs" className="btn-primary" style={{
-              background: 'white',
-              color: 'var(--hsn-green)',
-              fontSize: '0.95rem',
-              padding: '0.8rem 1.75rem',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+              background: 'white', color: 'var(--hsn-green)',
+              fontSize: '1rem', padding: '0.875rem 2rem',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.25)',
             }}>
-              Browse Jobs
-              <ArrowRight size={16} />
+              Browse Jobs <ArrowRight size={16} />
             </Link>
             {user ? (
-              <Link href="/jobs/new" className="btn-outline-white" style={{ fontSize: '0.95rem', padding: '0.8rem 1.75rem' }}>
-                <Plus size={16} />
-                Post an Opportunity
+              <Link href="/jobs/new" className="btn-outline-white" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+                <Plus size={16} /> Post a Job
               </Link>
             ) : (
-              <Link href="/auth/signup" className="btn-outline-white" style={{ fontSize: '0.95rem', padding: '0.8rem 1.75rem' }}>
-                Join the Network
+              <Link href="/auth/signup" className="btn-outline-white" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+                Join HSN
               </Link>
             )}
           </div>
         </div>
       </section>
 
-      {/* Trust bar */}
-      <section style={{
-        background: 'white',
-        borderBottom: '1px solid var(--hsn-border)',
-        padding: '1rem 1.5rem',
-      }}>
-        <div style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '2.5rem',
-          flexWrap: 'wrap',
-        }}>
-          {trustItems.map(item => (
-            <div key={item.label} style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontSize: '0.85rem',
-              color: 'var(--hsn-green)',
-              fontWeight: 600,
-            }}>
-              <item.icon size={15} strokeWidth={2.5} />
-              {item.label}
-            </div>
-          ))}
+      {/* ── Mission & Vision ──────────────────────────────────────── */}
+      <section style={{ background: 'white', borderBottom: '1px solid var(--hsn-border)', padding: '5rem 1.5rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{
+            fontSize: 'clamp(1.35rem, 2.5vw, 1.875rem)',
+            fontWeight: 800, color: 'var(--hsn-dark)',
+            lineHeight: 1.4, letterSpacing: '-0.025em',
+            maxWidth: '680px', margin: '0 auto',
+          }}>
+            "We exist to make halal success accessible to every Muslim — through community, trust, and shared values."
+          </p>
+
+          {/* Gold rule */}
+          <div style={{ width: '48px', height: '3px', background: 'var(--hsn-gold)', borderRadius: '9999px', margin: '1.75rem auto 3.5rem' }} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+            {pillars.map(p => (
+              <div key={p.title} className="card" style={{ padding: '2rem 1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--hsn-green-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <p.icon size={24} color="var(--hsn-green)" strokeWidth={1.75} />
+                </div>
+                <p style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--hsn-dark)', margin: 0 }}>{p.title}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--hsn-gray)', lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '5rem 1.5rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 className="section-title">Explore Opportunities</h2>
-          <p className="section-subtitle">Seven categories of halal opportunities, all in one place</p>
-        </div>
+      {/* ── Core Features ─────────────────────────────────────────── */}
+      <section style={{ background: 'var(--hsn-bg)', padding: '5.5rem 1.5rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <h2 className="section-title">Everything in one place</h2>
+            <p className="section-subtitle">Jobs, businesses, guidance, and mentorship — all halal, all community-verified.</p>
+          </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
-          gap: '1.25rem',
-        }}>
-          {categories.map(cat => {
-            const Icon = cat.icon
-            return (
-              <Link key={cat.label} href={cat.href} style={{ textDecoration: 'none' }}>
-                <div className="card" style={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.875rem',
-                  cursor: 'pointer',
-                }}>
-                  <div style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '10px',
-                    background: cat.bg,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <Icon size={22} color={cat.color} strokeWidth={1.75} />
+          <div className="feature-grid">
+            {features.map(f => (
+              <Link key={f.href} href={f.href} style={{ textDecoration: 'none', display: 'block' }}>
+                <div className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%', cursor: 'pointer' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--hsn-green-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <f.icon size={22} color="var(--hsn-green)" strokeWidth={1.75} />
                   </div>
-                  <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '0.975rem', color: 'var(--hsn-dark)', marginBottom: '0.3rem' }}>
-                      {cat.label}
+                  <div style={{ flex: 1 }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--hsn-dark)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+                      {f.title}
                     </h3>
-                    <p style={{ color: 'var(--hsn-gray)', fontSize: '0.875rem', lineHeight: 1.6 }}>
-                      {cat.desc}
+                    <p style={{ color: 'var(--hsn-gray)', fontSize: '0.875rem', lineHeight: 1.65 }}>
+                      {f.desc}
                     </p>
                   </div>
-                  <div style={{
-                    marginTop: 'auto',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                    fontSize: '0.82rem',
-                    fontWeight: 600,
-                    color: cat.color,
-                  }}>
-                    Browse <ArrowRight size={13} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.825rem', fontWeight: 700, color: 'var(--hsn-green)', marginTop: 'auto' }}>
+                    Explore <ArrowRight size={14} />
                   </div>
                 </div>
               </Link>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{
-        background: 'linear-gradient(135deg, var(--hsn-dark) 0%, #1E293B 100%)',
-        color: 'white',
-        padding: '5rem 1.5rem',
-        textAlign: 'center',
-      }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '56px',
-          height: '56px',
-          borderRadius: '14px',
-          background: 'rgba(27,107,58,0.4)',
-          marginBottom: '1.5rem',
-        }}>
-          <Plus size={28} color="var(--hsn-gold-light)" />
+      {/* ── How it Works ──────────────────────────────────────────── */}
+      <section style={{ background: 'white', borderTop: '1px solid var(--hsn-border)', padding: '5.5rem 1.5rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <h2 className="section-title">How it works</h2>
+            <p className="section-subtitle">Get started in three simple steps</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', position: 'relative' }}>
+            {/* Dashed connector — desktop only */}
+            <div className="hidden-mobile" style={{
+              position: 'absolute', top: '23px',
+              left: 'calc(16.66% + 24px)', right: 'calc(16.66% + 24px)',
+              height: '1px',
+              background: 'repeating-linear-gradient(90deg, var(--hsn-green) 0, var(--hsn-green) 5px, transparent 5px, transparent 12px)',
+              opacity: 0.3, pointerEvents: 'none',
+            }} />
+
+            {steps.map(s => (
+              <div key={s.n} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+                <div style={{
+                  width: '48px', height: '48px', borderRadius: '50%',
+                  background: 'var(--hsn-green)', color: 'white',
+                  fontWeight: 800, fontSize: '1.1rem',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 1.25rem',
+                  boxShadow: '0 4px 12px rgba(27,107,58,0.3)',
+                }}>
+                  {s.n}
+                </div>
+                <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--hsn-dark)', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+                  {s.title}
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: 'var(--hsn-gray)', lineHeight: 1.65, maxWidth: '240px', margin: '0 auto' }}>
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.875rem', letterSpacing: '-0.02em' }}>
-          Have an opportunity to share?
-        </h2>
-        <p style={{ color: '#94A3B8', marginBottom: '2rem', fontSize: '1.05rem', maxWidth: '480px', margin: '0 auto 2rem', lineHeight: 1.7 }}>
-          Post a job, business opportunity, or community need — help a fellow Muslim thrive.
-        </p>
-        <Link href="/jobs/new" className="btn-primary" style={{ fontSize: '0.975rem', padding: '0.8rem 2rem' }}>
-          Post an Opportunity
-          <ArrowRight size={16} />
-        </Link>
+      </section>
+
+      {/* ── Final CTA ─────────────────────────────────────────────── */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0D3D22 0%, var(--hsn-dark) 60%, #1E293B 100%)',
+        color: 'white', padding: '6rem 1.5rem', textAlign: 'center',
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: '-60px',  right: '-60px', width: '360px', height: '360px', borderRadius: '50%', background: 'rgba(27,107,58,0.12)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-80px', left: '-40px',  width: '280px', height: '280px', borderRadius: '50%', background: 'rgba(255,255,255,0.02)', pointerEvents: 'none' }} />
+
+        <div style={{ maxWidth: '600px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+            background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)',
+            borderRadius: '9999px', padding: '0.35rem 1rem',
+            fontSize: '0.75rem', fontWeight: 600, color: 'var(--hsn-gold-light)',
+            marginBottom: '1.5rem', letterSpacing: '0.04em',
+          }}>
+            ✦&nbsp; Free to join
+          </div>
+
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 900, lineHeight: 1.1,
+            marginBottom: '1rem', letterSpacing: '-0.03em',
+          }}>
+            Join the HSN community
+          </h2>
+
+          <p style={{
+            color: 'var(--hsn-gray-light)', fontSize: '1.05rem',
+            lineHeight: 1.7, maxWidth: '440px', margin: '0 auto 2.5rem',
+          }}>
+            Free to join. Rooted in Islamic values. Built for the Ummah.
+          </p>
+
+          <div style={{ display: 'flex', gap: '0.875rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {user ? (
+              <Link href="/jobs/new" className="btn-primary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+                <Plus size={16} /> Post a Job
+              </Link>
+            ) : (
+              <Link href="/auth/signup" className="btn-primary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+                Join HSN <ArrowRight size={16} />
+              </Link>
+            )}
+            <Link href="/jobs" className="btn-outline-white" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+              Browse Jobs
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   )
