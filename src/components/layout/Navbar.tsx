@@ -119,39 +119,32 @@ export default function Navbar({ user }: NavbarProps) {
           </nav>
 
           {/* Auth area */}
-          <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             {user ? (
               <>
+                {/* Admin badge — desktop only */}
                 {user.is_admin && (
-                  <Link href="/admin" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                    fontSize: '0.8rem',
-                    fontWeight: 600,
-                    color: 'var(--hsn-green)',
-                    textDecoration: 'none',
-                    border: '1.5px solid var(--hsn-green)',
-                    borderRadius: '0.4rem',
-                    padding: '0.3rem 0.65rem',
+                  <Link href="/admin" className="hidden-mobile" style={{
+                    display: 'flex', alignItems: 'center', gap: '0.3rem',
+                    fontSize: '0.8rem', fontWeight: 600, color: 'var(--hsn-green)',
+                    textDecoration: 'none', border: '1.5px solid var(--hsn-green)',
+                    borderRadius: '0.4rem', padding: '0.3rem 0.65rem',
                     background: 'var(--hsn-green-50)',
                   }}>
                     <Shield size={13} />
                     Admin
                   </Link>
                 )}
+
+                {/* Profile — desktop shows name, mobile shows initials only */}
                 <Link
                   href="/dashboard"
+                  className="hidden-mobile"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    textDecoration: 'none',
-                    padding: '0.35rem 0.75rem 0.35rem 0.4rem',
-                    borderRadius: '9999px',
-                    border: '1.5px solid var(--hsn-border)',
-                    background: 'white',
-                    transition: 'all 0.15s',
+                    display: 'flex', alignItems: 'center', gap: '0.5rem',
+                    textDecoration: 'none', padding: '0.35rem 0.75rem 0.35rem 0.4rem',
+                    borderRadius: '9999px', border: '1.5px solid var(--hsn-border)',
+                    background: 'white', transition: 'all 0.15s',
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.borderColor = 'var(--hsn-green)'
@@ -174,7 +167,9 @@ export default function Navbar({ user }: NavbarProps) {
                     {user.full_name?.split(' ')[0] ?? 'Dashboard'}
                   </span>
                 </Link>
-                <form action={logout}>
+
+                {/* Logout — desktop only */}
+                <form action={logout} className="hidden-mobile">
                   <button
                     type="submit"
                     title="Sign out"
@@ -307,8 +302,49 @@ export default function Navbar({ user }: NavbarProps) {
               )
             })}
 
-            {/* Auth buttons */}
-            {!user && (
+            {/* Auth section at bottom of mobile menu */}
+            {user ? (
+              <div style={{ padding: '0.75rem 0.5rem 0.25rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                {user.is_admin && (
+                  <Link href="/admin" onClick={() => setMenuOpen(false)} style={{
+                    display: 'flex', alignItems: 'center', gap: '0.6rem',
+                    padding: '0.65rem 0.75rem', borderRadius: '0.5rem',
+                    background: 'var(--hsn-green-muted)', textDecoration: 'none',
+                    fontWeight: 600, fontSize: '0.875rem', color: 'var(--hsn-green)',
+                  }}>
+                    <Shield size={15} />
+                    Admin Panel
+                  </Link>
+                )}
+                <Link href="/dashboard" onClick={() => setMenuOpen(false)} style={{
+                  display: 'flex', alignItems: 'center', gap: '0.6rem',
+                  padding: '0.65rem 0.75rem', borderRadius: '0.5rem',
+                  border: '1.5px solid var(--hsn-border)', textDecoration: 'none',
+                  fontWeight: 600, fontSize: '0.875rem', color: 'var(--hsn-dark)', background: 'white',
+                }}>
+                  <span style={{
+                    width: '24px', height: '24px', borderRadius: '50%',
+                    background: 'linear-gradient(135deg, var(--hsn-green) 0%, var(--hsn-green-light) 100%)',
+                    color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontWeight: 700, fontSize: '0.7rem', flexShrink: 0,
+                  }}>
+                    {initials}
+                  </span>
+                  {user.full_name?.split(' ')[0] ?? 'Dashboard'}
+                </Link>
+                <form action={logout}>
+                  <button type="submit" style={{
+                    width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem',
+                    padding: '0.65rem 0.75rem', borderRadius: '0.5rem',
+                    border: '1.5px solid #FECACA', background: '#FEF2F2',
+                    color: '#DC2626', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer',
+                  }}>
+                    <LogOut size={15} />
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            ) : (
               <div style={{ display: 'flex', gap: '0.5rem', padding: '0.875rem 0.5rem 0.25rem' }}>
                 <Link href="/auth/login" className="btn-secondary" style={{ flex: 1, justifyContent: 'center', padding: '0.6rem 1rem', fontSize: '0.875rem' }}>
                   Log in

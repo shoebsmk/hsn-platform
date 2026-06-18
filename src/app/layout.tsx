@@ -13,6 +13,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Halal Success Network",
   description: "Connecting the Ummah with trusted halal opportunities for income, employment, business, learning, and community growth.",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default async function RootLayout({
