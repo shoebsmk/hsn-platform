@@ -1,3 +1,14 @@
+export const BUSINESS_CATEGORIES = [
+  { value: 'restaurant',   label: 'Restaurant & Food',   icon: '🍽️' },
+  { value: 'grocery',      label: 'Grocery & Retail',    icon: '🛒' },
+  { value: 'catering',     label: 'Catering',            icon: '🥘' },
+  { value: 'services',     label: 'Professional Services', icon: '💼' },
+  { value: 'finance',      label: 'Islamic Finance',     icon: '🏦' },
+  { value: 'education',    label: 'Education & Tutoring', icon: '📚' },
+  { value: 'health',       label: 'Health & Wellness',   icon: '🏥' },
+  { value: 'other',        label: 'Other',               icon: '📦' },
+] as const
+
 export const CATEGORIES = [
   { value: 'hidden_jobs',     label: 'Hidden Jobs',       icon: '💼' },
   { value: 'community',       label: 'Community',         icon: '🤝' },

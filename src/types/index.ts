@@ -63,6 +63,26 @@ export interface Announcement {
   created_at: string
 }
 
+export type BusinessCategory = 'restaurant' | 'grocery' | 'catering' | 'services' | 'finance' | 'education' | 'health' | 'other'
+export type BusinessStatus = 'pending' | 'active' | 'rejected'
+
+export interface Business {
+  id: string
+  name: string
+  description: string
+  category: BusinessCategory
+  location: Location
+  address?: string
+  phone?: string
+  website?: string
+  is_verified: boolean
+  status: BusinessStatus
+  submitted_by?: string
+  submitter?: Profile
+  created_at: string
+  updated_at: string
+}
+
 export interface MentorProfile {
   id: string
   profile_id: string

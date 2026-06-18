@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   ArrowLeft,
   Shield,
+  Store,
 } from 'lucide-react'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -29,6 +30,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const navItems = [
     { href: '/admin',               label: 'Dashboard',    icon: LayoutDashboard },
     { href: '/admin/opportunities', label: 'Opportunities', icon: Briefcase },
+    { href: '/admin/directory',     label: 'Directory',    icon: Store },
     { href: '/admin/guidance',      label: 'Guidance',     icon: BookOpen },
     { href: '/admin/users',         label: 'Users',        icon: Users },
     { href: '/admin/announcements', label: 'Announcements',icon: Megaphone },

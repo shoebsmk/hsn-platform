@@ -32,6 +32,30 @@ create table public.opportunities (
   updated_at timestamptz default now()
 );
 
+-- Halal Business Directory
+create table public.businesses (
+  id uuid default gen_random_uuid() primary key,
+  name text not null,
+  description text not null,
+  category text check (category in (
+    'restaurant', 'grocery', 'catering', 'services',
+    'finance', 'education', 'health', 'other'
+  )) not null,
+  location text check (location in ('hyderabad', 'chicago', 'remote')) not null,
+  address text,
+  phone text,
+  website text,
+  is_verified boolean default false,
+  status text check (status in ('pending', 'active', 'rejected')) default 'active',
+  submitted_by uuid references public.profiles(id) on delete set null,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+alter table public.businesses enable row level security;
+create policy "Active businesses are public" on public.businesses for select using (status = 'active');
+create policy "Users can submit businesses" on public.businesses for insert with check (auth.uid() = submitted_by);
+
 -- Mentor profiles
 create table public.mentor_profiles (
   id uuid default gen_random_uuid() primary key,
