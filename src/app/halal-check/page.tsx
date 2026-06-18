@@ -94,7 +94,7 @@ export default async function HalalCheckPage({ searchParams }: PageProps) {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '3rem', alignItems: 'start' }}>
+      <div className="halal-check-grid">
 
         {/* Verdicts */}
         <div>
@@ -179,7 +179,7 @@ export default async function HalalCheckPage({ searchParams }: PageProps) {
         </div>
 
         {/* Submit form */}
-        <div style={{ position: 'sticky', top: '90px' }}>
+        <div className="halal-form-sticky">
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--hsn-dark)', marginBottom: '1.25rem' }}>
             Submit for Review
           </h2>

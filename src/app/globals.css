@@ -217,3 +217,78 @@ body {
 @media (min-width: 769px) {
   .hidden-desktop { display: none !important; }
 }
+
+/* Mobile filter chips (Jobs / Business pages) */
+.mobile-filter-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--hsn-gray-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.35rem;
+}
+.mobile-chip-row {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.mobile-chip-row::-webkit-scrollbar { display: none; }
+.mobile-chip {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1.5px solid var(--hsn-border);
+  background: white;
+  color: var(--hsn-gray);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.mobile-chip-active {
+  background: var(--hsn-green);
+  color: white;
+  border-color: var(--hsn-green);
+}
+
+/* Jobs / Business sidebar grid — collapses to single column on mobile */
+.sidebar-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .sidebar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Halal Check responsive grid */
+.halal-check-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 3rem;
+  align-items: start;
+}
+.halal-form-sticky {
+  position: sticky;
+  top: 90px;
+}
+@media (max-width: 768px) {
+  .halal-check-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .halal-check-grid > :last-child {
+    order: -1;
+  }
+  .halal-form-sticky {
+    position: static;
+  }
+}

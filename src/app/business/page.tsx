@@ -87,9 +87,39 @@ export default async function DirectoryPage({ searchParams }: PageProps) {
         {params.location && <input type="hidden" name="location" value={params.location} />}
       </form>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '2rem', alignItems: 'start' }}>
-        {/* Sidebar */}
-        <aside>
+      {/* Mobile filter chips — hidden on desktop */}
+      <div className="hidden-desktop" style={{ marginBottom: '1rem' }}>
+        <p className="mobile-filter-label">Category</p>
+        <div className="mobile-chip-row">
+          <a href="/business" className={`mobile-chip${!activeCategory ? ' mobile-chip-active' : ''}`}>All</a>
+          {BUSINESS_CATEGORIES.map(cat => (
+            <a
+              key={cat.value}
+              href={`/business?category=${cat.value}${activeLocation ? `&location=${activeLocation}` : ''}`}
+              className={`mobile-chip${activeCategory === cat.value ? ' mobile-chip-active' : ''}`}
+            >
+              {cat.icon} {cat.label}
+            </a>
+          ))}
+        </div>
+        <p className="mobile-filter-label">Location</p>
+        <div className="mobile-chip-row">
+          <a href={`/business${activeCategory ? `?category=${activeCategory}` : ''}`} className={`mobile-chip${!activeLocation ? ' mobile-chip-active' : ''}`}>All</a>
+          {LOCATIONS.map(loc => (
+            <a
+              key={loc.value}
+              href={`/business?location=${loc.value}${activeCategory ? `&category=${activeCategory}` : ''}`}
+              className={`mobile-chip${activeLocation === loc.value ? ' mobile-chip-active' : ''}`}
+            >
+              📍 {loc.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="sidebar-grid">
+        {/* Sidebar — hidden on mobile */}
+        <aside className="hidden-mobile">
           <div className="card" style={{ padding: '1.25rem' }}>
             <div style={{
               display: 'flex', alignItems: 'center', gap: '0.4rem',
