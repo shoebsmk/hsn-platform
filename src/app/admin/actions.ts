@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 async function requireAdmin() {
   const supabase = await createClient()
@@ -9,12 +10,36 @@ async function requireAdmin() {
   if (!user) throw new Error('Unauthorized')
   const { data: profile } = await supabase.from('profiles').select('is_admin').eq('id', user.id).single()
   if (!profile?.is_admin) throw new Error('Forbidden')
-  return supabase
+  return createAdminClient()
 }
 
 export async function updateOpportunityStatus(id: string, status: string) {
   const supabase = await requireAdmin()
   await supabase.from('opportunities').update({ status }).eq('id', id)
+  revalidatePath('/admin/opportunities')
+  revalidatePath('/opportunities')
+}
+
+export async function approveOpportunity(formData: FormData) {
+  const supabase = await requireAdmin()
+  const id = formData.get('id') as string
+  await supabase.from('opportunities').update({ status: 'active' }).eq('id', id)
+  revalidatePath('/admin/opportunities')
+  revalidatePath('/opportunities')
+}
+
+export async function rejectOpportunity(formData: FormData) {
+  const supabase = await requireAdmin()
+  const id = formData.get('id') as string
+  await supabase.from('opportunities').update({ status: 'rejected' }).eq('id', id)
+  revalidatePath('/admin/opportunities')
+  revalidatePath('/opportunities')
+}
+
+export async function flagOpportunity(formData: FormData) {
+  const supabase = await requireAdmin()
+  const id = formData.get('id') as string
+  await supabase.from('opportunities').update({ status: 'flagged' }).eq('id', id)
   revalidatePath('/admin/opportunities')
   revalidatePath('/opportunities')
 }

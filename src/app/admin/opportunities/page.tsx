@@ -1,9 +1,9 @@
-import { createClient } from '@/lib/supabase/server'
-import { updateOpportunityStatus } from '../actions'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { CATEGORIES, LOCATIONS } from '@/lib/constants'
+import OppActions from './OppActions'
 
 export default async function AdminOpportunitiesPage() {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   const { data: opportunities } = await supabase
     .from('opportunities')
@@ -15,7 +15,7 @@ export default async function AdminOpportunitiesPage() {
     active:   { bg: '#D1FAE5', color: '#065F46' },
     rejected: { bg: '#FEE2E2', color: '#991B1B' },
     closed:   { bg: '#F3F4F6', color: '#6B7280' },
-    flagged:  { bg: '#FEE2E2', color: '#B45309' },
+    flagged:  { bg: '#FFE4B5', color: '#92400E' },
     expired:  { bg: '#F3F4F6', color: '#6B7280' },
   }
 
@@ -58,23 +58,7 @@ export default async function AdminOpportunitiesPage() {
                     </span>
                   </td>
                   <td style={{ padding: '0.75rem 1rem' }}>
-                    <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                      {opp.status !== 'active' && (
-                        <form action={async () => { 'use server'; await updateOpportunityStatus(opp.id, 'active') }}>
-                          <button type="submit" style={actionBtn('var(--hsn-green)', 'white')}>Approve</button>
-                        </form>
-                      )}
-                      {opp.status !== 'rejected' && (
-                        <form action={async () => { 'use server'; await updateOpportunityStatus(opp.id, 'rejected') }}>
-                          <button type="submit" style={actionBtn('#EF4444', 'white')}>Reject</button>
-                        </form>
-                      )}
-                      {opp.status !== 'flagged' && (
-                        <form action={async () => { 'use server'; await updateOpportunityStatus(opp.id, 'flagged') }}>
-                          <button type="submit" style={actionBtn('#F59E0B', 'white')}>Flag</button>
-                        </form>
-                      )}
-                    </div>
+                    <OppActions id={opp.id} status={opp.status} />
                   </td>
                 </tr>
               )
@@ -91,16 +75,3 @@ export default async function AdminOpportunitiesPage() {
   )
 }
 
-function actionBtn(bg: string, color: string): React.CSSProperties {
-  return {
-    background: bg,
-    color,
-    border: 'none',
-    borderRadius: '0.375rem',
-    padding: '0.3rem 0.65rem',
-    fontSize: '0.75rem',
-    fontWeight: 600,
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-  }
-}
