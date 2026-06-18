@@ -1,52 +1,106 @@
 import Link from 'next/link'
+import { MapPin, Heart } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--hsn-dark)', color: '#9CA3AF', marginTop: 'auto' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '3rem 1.5rem 2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
+    <footer style={{ background: 'var(--hsn-dark)', color: '#94A3B8' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '3.5rem 1.5rem 2rem' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '2.5rem',
+          marginBottom: '3rem',
+        }}>
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span style={{ background: 'var(--hsn-green)', color: 'white', fontWeight: 700, fontSize: '0.9rem', padding: '0.25rem 0.5rem', borderRadius: '5px' }}>HSN</span>
-              <span style={{ color: 'white', fontWeight: 600, fontSize: '0.9rem' }}>Halal Success Network</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
+              <div style={{
+                background: 'linear-gradient(135deg, var(--hsn-green) 0%, var(--hsn-green-light) 100%)',
+                color: 'white',
+                fontWeight: 800,
+                fontSize: '0.875rem',
+                padding: '0.3rem 0.6rem',
+                borderRadius: '7px',
+                letterSpacing: '0.08em',
+              }}>HSN</div>
+              <span style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '-0.01em' }}>
+                Halal Success Network
+              </span>
             </div>
-            <p style={{ fontSize: '0.85rem', lineHeight: 1.6 }}>
-              Connecting the Ummah with trusted halal opportunities.
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.7, maxWidth: '220px' }}>
+              Connecting the Ummah with trusted halal opportunities for income, employment, and community growth.
             </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginTop: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem' }}>
+                <MapPin size={13} color="var(--hsn-gold)" /> Hyderabad, India
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem' }}>
+                <MapPin size={13} color="var(--hsn-gold)" /> Greater Chicago, USA
+              </div>
+            </div>
           </div>
 
           {/* Opportunities */}
           <div>
-            <h4 style={{ color: 'white', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Opportunities</h4>
-            {['Jobs', 'Business', 'Gig & Services', 'Income', 'Community'].map(item => (
-              <div key={item} style={{ marginBottom: '0.4rem' }}>
-                <Link href="/opportunities" style={{ color: '#9CA3AF', fontSize: '0.85rem', textDecoration: 'none' }}>{item}</Link>
-              </div>
+            <h4 style={{
+              color: 'white', fontWeight: 700, marginBottom: '1rem',
+              fontSize: '0.8rem', letterSpacing: '0.07em', textTransform: 'uppercase',
+            }}>
+              Opportunities
+            </h4>
+            {[
+              ['Hidden Jobs', '/opportunities?category=hidden_jobs'],
+              ['Business', '/opportunities?category=business'],
+              ['Gig & Services', '/opportunities?category=gig_services'],
+              ['Income Generation', '/opportunities?category=income'],
+              ['Community', '/opportunities?category=community'],
+            ].map(([label, href]) => (
+              <Link key={href} href={href} className="footer-link">{label}</Link>
             ))}
           </div>
 
           {/* Platform */}
           <div>
-            <h4 style={{ color: 'white', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Platform</h4>
-            {[['Mentorship', '/mentorship'], ['Post an Opportunity', '/opportunities/new'], ['About HSN', '/about']].map(([label, href]) => (
-              <div key={href} style={{ marginBottom: '0.4rem' }}>
-                <Link href={href} style={{ color: '#9CA3AF', fontSize: '0.85rem', textDecoration: 'none' }}>{label}</Link>
-              </div>
+            <h4 style={{
+              color: 'white', fontWeight: 700, marginBottom: '1rem',
+              fontSize: '0.8rem', letterSpacing: '0.07em', textTransform: 'uppercase',
+            }}>
+              Platform
+            </h4>
+            {[
+              ['Mentorship', '/mentorship'],
+              ['Career Guidance', '/guidance'],
+              ['Post an Opportunity', '/opportunities/new'],
+              ['About HSN', '/about'],
+              ['Join the Network', '/auth/signup'],
+            ].map(([label, href]) => (
+              <Link key={href} href={href} className="footer-link">{label}</Link>
             ))}
-          </div>
-
-          {/* Locations */}
-          <div>
-            <h4 style={{ color: 'white', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.9rem' }}>Serving</h4>
-            <p style={{ fontSize: '0.85rem', marginBottom: '0.4rem' }}>📍 Hyderabad, India</p>
-            <p style={{ fontSize: '0.85rem' }}>📍 Greater Chicago, USA</p>
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #374151', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <p style={{ fontSize: '0.8rem' }}>© {new Date().getFullYear()} Halal Success Network. All rights reserved.</p>
-          <p style={{ fontSize: '0.8rem', color: 'var(--hsn-gold)' }}>Building Stronger Muslim Careers and Businesses</p>
+        <div style={{
+          borderTop: '1px solid #1E293B',
+          paddingTop: '1.5rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
+        }}>
+          <p style={{ fontSize: '0.8rem' }}>
+            © {new Date().getFullYear()} Halal Success Network. All rights reserved.
+          </p>
+          <p style={{
+            fontSize: '0.8rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            color: 'var(--hsn-gold)',
+          }}>
+            <Heart size={13} fill="currentColor" />
+            Building Stronger Muslim Careers &amp; Businesses
+          </p>
         </div>
       </div>
     </footer>

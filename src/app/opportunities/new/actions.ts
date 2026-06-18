@@ -18,7 +18,7 @@ export async function submitOpportunity(formData: FormData) {
     external_url: formData.get('external_url') as string || null,
     is_remote: formData.get('is_remote') === 'on',
     provider_id: user.id,
-    status: 'active',
+    status: 'pending',
   })
 
   if (error) return { error: error.message }

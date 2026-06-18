@@ -109,6 +109,73 @@ Protected by `is_admin = true` on the user's profile. Non-admins are redirected.
 
 ---
 
+---
+
+## Session 2 — 2026-06-18
+
+### 🎨 UI/UX Overhaul
+- Installed `lucide-react` — replaced all emoji icons with proper SVG icons throughout
+- **Navbar** — sticky with glass blur, Lucide icons in nav links, pill-style user avatar, icon-only sign-out button (turns red on hover), working mobile hamburger menu
+- **Homepage** — dark gradient hero with decorative circles, gold accent headline, `MapPin` location badge, glass-style outline CTA; category cards now have color-coded icon tiles with per-category `Browse →` links; trust bar uses `CheckCircle`/`Users`/`Star` icons
+- **Opportunities page** — search bar with inline `Search` icon, filter sidebar with `SlidersHorizontal` header, listing cards with color-coded icon tiles, `MapPin` for location, `CheckCircle` verified badge
+- **Dashboard** — avatar with gradient initials, role/location badges, quick-action cards with icon tiles and `ChevronRight` links, account section with icon rows
+- **Footer** — `MapPin` icons for locations, `Heart` in tagline, uppercase section headers, CSS hover effects
+
+### 🛡️ Admin UI Overhaul
+- **Sidebar** — dark `#0F172A` panel, Shield icon logo, user avatar pill, Lucide icons on all nav items (`LayoutDashboard`, `Briefcase`, `BookOpen`, `Users`, `Megaphone`), `ArrowLeft` back-to-site link
+- **Dashboard** — stat cards with color-coded icon tiles, clickable (link to each section), "Needs attention" on pending; recent panels have "View all →" links and avatar initials
+- **Opportunities table** — category column shows mini icon tile, `ClickableRow` client component makes entire row clickable with hover highlight (`#F8FAFC`), navigates to detail on click
+- **Users table** — Member column combines avatar + name + email; `CheckCircle`/`Minus` icons for admin status
+- **Guidance** — `BookOpen` icon tiles, `Pencil`/`Trash2` icon buttons, icon empty state
+- **Announcements** — `Megaphone` on submit, `MapPin` for location, `ToggleLeft`/`ToggleRight` on activate/deactivate, `Trash2` on delete
+
+### 🔒 Post Review Flow Fixed
+- New opportunity submissions were defaulting to `status: 'active'`, bypassing admin review
+- Changed insert to `status: 'pending'` — all posts now queue in admin for approval before going live
+
+### 🏠 Homepage Auth-Awareness
+- "Join the Network" CTA in hero now swaps to "Post an Opportunity" when user is already logged in
+
+---
+
+### ✅ Halal Check (`/halal-check`)
+Community members can submit a job URL or description to get a halal ruling from HSN scholars.
+
+**Public page (`/halal-check`)**
+- Two-column layout: published verdicts feed (left) + sticky submission form (right)
+- Each verdict card is color-coded: green `CheckCircle` (Permissible), red `XCircle` (Not Permissible), amber `AlertCircle` (Needs Context)
+- Scholar's Note block displayed per ruling; Source link opens original URL in new tab
+- Success state after submission with JazakAllahu Khayran message
+- Anyone can submit (logged in or anonymous); new submissions default to `pending`
+
+**Admin panel (`/admin/halal-checks`)**
+- Split into "Awaiting Review" and "Published Rulings" sections
+- Pending badge count in page header
+- Each pending card shows full description, URL, submitter name, and date
+- `VerdictPicker` client component — interactive radio buttons (Permissible / Not Permissible / Needs Context) with selected-state highlight
+- Scholar's Note textarea; "Publish Ruling" button writes verdict + notes to DB and instantly reflects on public page
+- Delete button on both pending and reviewed items
+
+**DB table**
+```sql
+CREATE TABLE halal_checks (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  url text,
+  description text NOT NULL,
+  status text CHECK (status IN ('pending', 'reviewed')) DEFAULT 'pending',
+  verdict text CHECK (verdict IN ('permissible', 'not_permissible', 'needs_context')),
+  scholar_notes text,
+  submitter_id uuid REFERENCES profiles(id) ON DELETE SET NULL,
+  reviewed_by uuid REFERENCES profiles(id) ON DELETE SET NULL,
+  created_at timestamptz DEFAULT now(),
+  reviewed_at timestamptz DEFAULT now()
+);
+```
+
+**Navigation**
+- "Halal Check" added to main navbar (between Opportunities and Guidance) with `ShieldCheck` icon
+- "Halal Check" added to admin sidebar as last nav item
+
 ### 🔜 Planned (not yet built)
 - Announcements displayed on the homepage
 - Rich text editor for guidance articles

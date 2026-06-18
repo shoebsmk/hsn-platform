@@ -1,4 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
+import {
+  Users,
+  Briefcase,
+  Clock,
+  BookOpen,
+  Megaphone,
+  TrendingUp,
+  ArrowRight,
+} from 'lucide-react'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -18,90 +28,149 @@ export default async function AdminDashboard() {
   ])
 
   const stats = [
-    { label: 'Total Members', value: totalUsers ?? 0, icon: '👥', color: '#3B82F6' },
-    { label: 'Total Opportunities', value: totalOpportunities ?? 0, icon: '💼', color: 'var(--hsn-green)' },
-    { label: 'Pending Review', value: pendingOpportunities ?? 0, icon: '⏳', color: '#F59E0B', alert: (pendingOpportunities ?? 0) > 0 },
-    { label: 'Guidance Articles', value: totalArticles ?? 0, icon: '📚', color: '#8B5CF6' },
-    { label: 'Active Announcements', value: activeAnnouncements ?? 0, icon: '📣', color: '#EF4444' },
+    { label: 'Total Members',        value: totalUsers ?? 0,           icon: Users,      color: '#1D4ED8', bg: '#EFF6FF', href: '/admin/users' },
+    { label: 'Total Opportunities',  value: totalOpportunities ?? 0,   icon: Briefcase,  color: '#1B6B3A', bg: '#E8F5EE', href: '/admin/opportunities' },
+    { label: 'Pending Review',       value: pendingOpportunities ?? 0, icon: Clock,      color: '#B45309', bg: '#FEF9E7', href: '/admin/opportunities', alert: (pendingOpportunities ?? 0) > 0 },
+    { label: 'Guidance Articles',    value: totalArticles ?? 0,        icon: BookOpen,   color: '#7C3AED', bg: '#F5F3FF', href: '/admin/guidance' },
+    { label: 'Active Announcements', value: activeAnnouncements ?? 0,  icon: Megaphone,  color: '#DC2626', bg: '#FEF2F2', href: '/admin/announcements' },
   ]
 
-  // Recent signups
   const { data: recentUsers } = await supabase
     .from('profiles')
-    .select('full_name, email, role, location, created_at')
+    .select('full_name, email, role, created_at')
     .order('created_at', { ascending: false })
     .limit(5)
 
-  // Recent opportunities
   const { data: recentOpps } = await supabase
     .from('opportunities')
-    .select('title, status, category, created_at')
+    .select('id, title, status, category, created_at')
     .order('created_at', { ascending: false })
     .limit(5)
+
+  const roleColors: Record<string, { bg: string; color: string }> = {
+    seeker:   { bg: '#EFF6FF', color: '#1D4ED8' },
+    provider: { bg: '#E8F5EE', color: '#1B6B3A' },
+    mentor:   { bg: '#F5F3FF', color: '#7C3AED' },
+  }
+
+  const statusColors: Record<string, { bg: string; color: string }> = {
+    active:   { bg: '#D1FAE5', color: '#065F46' },
+    pending:  { bg: '#FEF3C7', color: '#92400E' },
+    rejected: { bg: '#FEE2E2', color: '#991B1B' },
+    closed:   { bg: '#F1F5F9', color: '#64748B' },
+  }
 
   return (
     <div>
-      <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--hsn-dark)', marginBottom: '0.25rem' }}>Dashboard</h1>
-      <p style={{ color: 'var(--hsn-gray)', fontSize: '0.875rem', marginBottom: '2rem' }}>Platform overview</p>
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--hsn-dark)', letterSpacing: '-0.02em' }}>
+          Dashboard
+        </h1>
+        <p style={{ color: 'var(--hsn-gray)', fontSize: '0.875rem', marginTop: '0.25rem' }}>Platform overview</p>
+      </div>
 
-      {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-        {stats.map(stat => (
-          <div key={stat.label} style={{
-            background: 'white',
-            borderRadius: '0.75rem',
-            padding: '1.25rem',
-            border: stat.alert ? '2px solid #F59E0B' : '1px solid var(--hsn-border)',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-          }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{stat.icon}</div>
-            <div style={{ fontSize: '1.75rem', fontWeight: 800, color: stat.color }}>{stat.value}</div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--hsn-gray)', marginTop: '0.25rem' }}>{stat.label}</div>
-          </div>
-        ))}
+      {/* Stats grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+        {stats.map(stat => {
+          const Icon = stat.icon
+          return (
+            <Link key={stat.label} href={stat.href} style={{ textDecoration: 'none' }}>
+              <div style={{
+                background: 'white',
+                borderRadius: '0.875rem',
+                padding: '1.25rem',
+                border: stat.alert ? `2px solid ${stat.color}` : '1px solid var(--hsn-border)',
+                boxShadow: 'var(--shadow-sm)',
+                transition: 'all 0.2s',
+                cursor: 'pointer',
+              }}>
+                <div style={{
+                  width: '38px', height: '38px', borderRadius: '9px',
+                  background: stat.bg,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '0.875rem',
+                }}>
+                  <Icon size={19} color={stat.color} strokeWidth={1.75} />
+                </div>
+                <div style={{ fontSize: '2rem', fontWeight: 800, color: stat.color, lineHeight: 1 }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--hsn-gray)', marginTop: '0.35rem', fontWeight: 500 }}>
+                  {stat.label}
+                </div>
+                {stat.alert && (
+                  <div style={{ fontSize: '0.72rem', color: stat.color, fontWeight: 700, marginTop: '0.3rem' }}>
+                    Needs attention
+                  </div>
+                )}
+              </div>
+            </Link>
+          )
+        })}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-        {/* Recent users */}
-        <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.25rem', border: '1px solid var(--hsn-border)' }}>
-          <h2 style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--hsn-dark)' }}>Recent Members</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {recentUsers?.map(u => (
-              <div key={u.email} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
-                <div>
-                  <div style={{ fontWeight: 600, color: 'var(--hsn-dark)' }}>{u.full_name || '—'}</div>
-                  <div style={{ color: 'var(--hsn-gray)', fontSize: '0.8rem' }}>{u.email}</div>
+        {/* Recent members */}
+        <div style={{ background: 'white', borderRadius: '0.875rem', padding: '1.5rem', border: '1px solid var(--hsn-border)', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+            <h2 style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--hsn-dark)' }}>Recent Members</h2>
+            <Link href="/admin/users" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', color: 'var(--hsn-green)', fontWeight: 600, textDecoration: 'none' }}>
+              View all <ArrowRight size={12} />
+            </Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+            {recentUsers?.map(u => {
+              const rc = roleColors[u.role] ?? { bg: '#F1F5F9', color: '#64748B' }
+              const initials = (u.full_name ?? u.email ?? 'U').split(' ').map((w: string) => w[0]).slice(0, 2).join('').toUpperCase()
+              return (
+                <div key={u.email} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
+                    <div style={{
+                      width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0,
+                      background: 'linear-gradient(135deg, #1B6B3A 0%, #2E8B57 100%)',
+                      color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '0.7rem', fontWeight: 700,
+                    }}>{initials}</div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontWeight: 600, color: 'var(--hsn-dark)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.full_name || '—'}</div>
+                      <div style={{ color: 'var(--hsn-gray)', fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.email}</div>
+                    </div>
+                  </div>
+                  <span style={{ fontSize: '0.7rem', background: rc.bg, color: rc.color, padding: '0.2rem 0.55rem', borderRadius: '9999px', fontWeight: 600, flexShrink: 0 }}>
+                    {u.role}
+                  </span>
                 </div>
-                <span style={{ fontSize: '0.75rem', background: 'var(--hsn-green-muted)', color: 'var(--hsn-green)', padding: '0.2rem 0.5rem', borderRadius: '9999px', fontWeight: 600 }}>
-                  {u.role}
-                </span>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
         {/* Recent opportunities */}
-        <div style={{ background: 'white', borderRadius: '0.75rem', padding: '1.25rem', border: '1px solid var(--hsn-border)' }}>
-          <h2 style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--hsn-dark)' }}>Recent Opportunities</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {recentOpps?.map(opp => (
-              <div key={opp.title + opp.created_at} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
-                <div style={{ fontWeight: 600, color: 'var(--hsn-dark)', flex: 1, marginRight: '0.5rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {opp.title}
+        <div style={{ background: 'white', borderRadius: '0.875rem', padding: '1.5rem', border: '1px solid var(--hsn-border)', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+            <h2 style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--hsn-dark)' }}>Recent Opportunities</h2>
+            <Link href="/admin/opportunities" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', color: 'var(--hsn-green)', fontWeight: 600, textDecoration: 'none' }}>
+              View all <ArrowRight size={12} />
+            </Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+            {recentOpps?.map(opp => {
+              const sc = statusColors[opp.status] ?? { bg: '#F1F5F9', color: '#64748B' }
+              return (
+                <div key={opp.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+                  <Link href={`/admin/opportunities/${opp.id}`} style={{
+                    fontWeight: 600, color: 'var(--hsn-dark)', fontSize: '0.875rem',
+                    flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    textDecoration: 'none',
+                  }}>
+                    {opp.title}
+                  </Link>
+                  <span style={{ fontSize: '0.7rem', padding: '0.2rem 0.55rem', borderRadius: '9999px', fontWeight: 600, flexShrink: 0, background: sc.bg, color: sc.color }}>
+                    {opp.status}
+                  </span>
                 </div>
-                <span style={{
-                  fontSize: '0.75rem',
-                  padding: '0.2rem 0.5rem',
-                  borderRadius: '9999px',
-                  fontWeight: 600,
-                  flexShrink: 0,
-                  background: opp.status === 'active' ? 'var(--hsn-green-muted)' : opp.status === 'pending' ? '#FEF3C7' : '#FEE2E2',
-                  color: opp.status === 'active' ? 'var(--hsn-green)' : opp.status === 'pending' ? '#92400E' : '#991B1B',
-                }}>
-                  {opp.status}
-                </span>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>
