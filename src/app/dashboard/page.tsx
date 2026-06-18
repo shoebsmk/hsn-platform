@@ -11,6 +11,7 @@ import {
   User,
   Mail,
   ChevronRight,
+  Pencil,
 } from 'lucide-react'
 
 export default async function DashboardPage() {
@@ -29,13 +30,13 @@ export default async function DashboardPage() {
     seeker: 'Opportunity Seeker',
     provider: 'Opportunity Provider',
     mentor: 'Mentor',
-  }[profile?.role ?? 'seeker']
+  }[(profile?.role ?? 'seeker') as 'seeker' | 'provider' | 'mentor']
 
   const locationLabel = {
     hyderabad: 'Hyderabad, India',
     chicago: 'Greater Chicago, USA',
     remote: 'Remote',
-  }[profile?.location ?? 'remote']
+  }[(profile?.location ?? 'remote') as 'hyderabad' | 'chicago' | 'remote']
 
   const initials = (profile?.full_name ?? user.email ?? 'U')
     .split(' ')
@@ -160,9 +161,21 @@ export default async function DashboardPage() {
 
       {/* Account info */}
       <div className="card">
-        <h2 style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '1.25rem', color: 'var(--hsn-dark)' }}>
-          Account Details
-        </h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+          <h2 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--hsn-dark)' }}>
+            Account Details
+          </h2>
+          <Link href="/dashboard/profile/edit" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+            fontSize: '0.82rem', fontWeight: 600, color: 'var(--hsn-green)',
+            textDecoration: 'none', border: '1.5px solid var(--hsn-green)',
+            borderRadius: '0.4rem', padding: '0.35rem 0.75rem',
+            background: 'var(--hsn-green-50)', transition: 'all 0.15s',
+          }}>
+            <Pencil size={13} />
+            Edit Profile
+          </Link>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{

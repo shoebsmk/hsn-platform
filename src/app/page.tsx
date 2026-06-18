@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import AnnouncementBanner from '@/components/AnnouncementBanner'
 import {
   Briefcase,
   Users,
@@ -83,8 +84,34 @@ export default async function HomePage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
+  let userLocation: string | null = null
+  if (user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('location')
+      .eq('id', user.id)
+      .single()
+    userLocation = profile?.location ?? null
+  }
+
+  let announcementsQuery = supabase
+    .from('announcements')
+    .select('*')
+    .eq('active', true)
+    .order('created_at', { ascending: false })
+
+  if (userLocation) {
+    announcementsQuery = announcementsQuery.in('location_target', ['all', userLocation])
+  } else {
+    announcementsQuery = announcementsQuery.eq('location_target', 'all')
+  }
+
+  const { data: announcements } = await announcementsQuery
+
   return (
     <>
+      <AnnouncementBanner announcements={announcements ?? []} />
+
       {/* Hero */}
       <section style={{
         background: 'linear-gradient(135deg, #0D3D22 0%, var(--hsn-green) 50%, #2E8B57 100%)',
