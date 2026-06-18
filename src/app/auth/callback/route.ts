@@ -10,5 +10,10 @@ export async function GET(request: Request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(`${origin}/dashboard`)
+  // Use forwarded host when behind a reverse proxy (e.g. Render)
+  const forwardedHost = request.headers.get('x-forwarded-host')
+  const forwardedProto = request.headers.get('x-forwarded-proto') ?? 'https'
+  const publicOrigin = forwardedHost ? `${forwardedProto}://${forwardedHost}` : origin
+
+  return NextResponse.redirect(`${publicOrigin}/dashboard`)
 }
