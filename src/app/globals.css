@@ -220,6 +220,49 @@ body {
   .hidden-desktop { display: none !important; }
 }
 
+/* Homepage editorial rows */
+.editorial-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--hsn-border);
+  text-decoration: none;
+  align-items: center;
+  gap: 2rem;
+  transition: background 0.15s;
+}
+.editorial-row:last-child {
+  border-bottom: 1px solid var(--hsn-border);
+}
+.editorial-row-name {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  color: var(--hsn-dark);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.3rem;
+  transition: color 0.15s;
+  line-height: 1.2;
+}
+.editorial-row:hover .editorial-row-name {
+  color: var(--hsn-green);
+}
+.editorial-row-desc {
+  font-size: 0.9rem;
+  color: var(--hsn-gray);
+  line-height: 1.5;
+}
+.editorial-row-arrow {
+  color: var(--hsn-gray-light);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.editorial-row:hover .editorial-row-arrow {
+  color: var(--hsn-green);
+  transform: translate(4px, -4px);
+}
+
 /* Homepage feature grid */
 .feature-grid {
   display: grid;
