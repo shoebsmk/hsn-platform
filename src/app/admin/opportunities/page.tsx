@@ -42,9 +42,11 @@ export default async function AdminOpportunitiesPage() {
               const sc = statusColors[opp.status] ?? { bg: '#F3F4F6', color: '#6B7280' }
 
               return (
-                <tr key={opp.id} style={{ borderBottom: '1px solid var(--hsn-border)' }}>
+                <tr key={opp.id} style={{ borderBottom: '1px solid var(--hsn-border)', cursor: 'pointer' }}>
                   <td style={{ padding: '0.75rem 1rem', fontWeight: 600, color: 'var(--hsn-dark)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {opp.title}
+                    <a href={`/admin/opportunities/${opp.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      {opp.title}
+                    </a>
                   </td>
                   <td style={{ padding: '0.75rem 1rem', color: 'var(--hsn-gray)' }}>{cat?.icon} {cat?.label}</td>
                   <td style={{ padding: '0.75rem 1rem', color: 'var(--hsn-gray)' }}>{loc?.label}</td>

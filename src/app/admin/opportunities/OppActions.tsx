@@ -1,16 +1,19 @@
 'use client'
 
 import { useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { approveOpportunity, rejectOpportunity, flagOpportunity } from '../actions'
 
-export default function OppActions({ id, status }: { id: string; status: string }) {
+export default function OppActions({ id, status, redirectTo }: { id: string; status: string; redirectTo?: string }) {
   const [pending, startTransition] = useTransition()
+  const router = useRouter()
 
   function handle(action: (formData: FormData) => Promise<void>) {
     startTransition(async () => {
       const fd = new FormData()
       fd.append('id', id)
       await action(fd)
+      if (redirectTo) router.refresh()
     })
   }
 

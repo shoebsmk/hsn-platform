@@ -44,6 +44,14 @@ export async function flagOpportunity(formData: FormData) {
   revalidatePath('/opportunities')
 }
 
+export async function saveAdminNotes(formData: FormData) {
+  const supabase = await requireAdmin()
+  const id = formData.get('id') as string
+  const notes = formData.get('notes') as string
+  await supabase.from('opportunities').update({ admin_notes: notes }).eq('id', id)
+  revalidatePath(`/admin/opportunities/${id}`)
+}
+
 export async function saveArticle(formData: FormData) {
   const supabase = await requireAdmin()
   const { data: { user } } = await supabase.auth.getUser()
