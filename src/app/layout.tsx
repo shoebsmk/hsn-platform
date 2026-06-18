@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BottomTabBar from "@/components/layout/BottomTabBar";
 import { createClient } from "@/lib/supabase/server";
 
 const geistSans = Geist({
@@ -44,6 +45,7 @@ export default async function RootLayout({
         <Navbar user={navUser} />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
+        <BottomTabBar user={navUser} />
       </body>
     </html>
   );
